@@ -1,10 +1,19 @@
 import { NavLink } from "react-router-dom";
+import useAuth from "./useAuth";
 
 const Nav = () => {
+    const {user,logOut} = useAuth()
+    const handleLogout=()=>{
+        logOut()
+    }
     const links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
+        {user?<>
+            <li><button onClick={handleLogout}>Logout</button></li>
+            <li><NavLink to={'/bookings'}>Bookings</NavLink></li>
+        </>:
         <li><NavLink to={'/login'}>Login</NavLink></li>
-        <li><NavLink to={'/register'}>Register</NavLink></li>
+        }
     </>
     return (
         <div className="navbar h-[100px] z-10 rounded-md">
